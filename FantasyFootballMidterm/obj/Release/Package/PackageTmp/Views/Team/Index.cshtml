@@ -1,0 +1,139 @@
+﻿@model  List<FantasyFootballMidterm.Models.usp_Players_GetByPosition_Result>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["UserID"] == null || Session["Completed"] != null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+<html>
+<body>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h2>Please select @ViewBag.posQuantity, @ViewBag.fullPosName</h2>
+            @using (Html.BeginForm())
+            {
+
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Age</th>
+                <th>Team</th>
+                <th>Games</th>
+                <th>Position</th>
+            </tr>
+            @for (int i = 0; i < Model?.Count(); i++)
+            {
+                if (ViewBag.Position == "QB" || ViewBag.Position == "TE")
+                {
+                    <tr onclick="checkOne(this)">
+                        <td>
+                            @Html.CheckBoxFor(m => m[i].Selected)
+                        </td>
+                        <td>@Model[i].Player</td>
+                        <td>@Model[i].Year</td>
+                        <td>@Model[i].Age</td>
+                        <td>@Model[i].Team</td>
+                        <td>@Model[i].GS</td>
+                        <td>@Model[i].Position</td>
+
+                        @Html.HiddenFor(m => m[i].Player)
+                        @Html.HiddenFor(m => m[i].Year)
+                        @Html.HiddenFor(m => m[i].Age)
+                        @Html.HiddenFor(m => m[i].Team)
+                        @Html.HiddenFor(m => m[i].GS)
+                        @Html.HiddenFor(m => m[i].Position)
+                        @Html.HiddenFor(m => m[i].PlayerID)
+                    </tr>
+                }
+                else
+                {
+                    <tr onclick="checkTwo(this)">
+                        <td>
+                            @Html.CheckBoxFor(m => m[i].Selected)
+                        </td>
+                        <td>@Model[i].Player</td>
+                        <td>@Model[i].Year</td>
+                        <td>@Model[i].Age</td>
+                        <td>@Model[i].Team</td>
+                        <td>@Model[i].GS</td>
+                        <td>@Model[i].Position</td>
+
+                        @Html.HiddenFor(m => m[i].Player)
+                        @Html.HiddenFor(m => m[i].Year)
+                        @Html.HiddenFor(m => m[i].Age)
+                        @Html.HiddenFor(m => m[i].Team)
+                        @Html.HiddenFor(m => m[i].GS)
+                        @Html.HiddenFor(m => m[i].Position)
+                        @Html.HiddenFor(m => m[i].PlayerID)
+                    </tr>
+                }
+
+            }
+
+        </table>
+                if (ViewBag.Position != "TE")
+                {
+                    <input type="submit" value="Next &raquo;" class="btn btn-default" disabled />
+                }
+                else
+                {
+                    <input type="submit" value="Finish &raquo;" class="btn btn-default" disabled />
+                }
+            }
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var previousSelection = null;
+
+    function checkOne(tableRow) {
+        var tableData = document.querySelectorAll('input[type=checkbox]');
+        var currentSelection = tableRow.querySelectorAll('input[type=checkbox]');
+
+        for (let i = 0; i < tableData.length; i++) {
+            if (tableData[i].name != currentSelection[0].name) {
+                tableData[i].checked = false;
+            }
+        }
+        validate(1);
+    }
+
+    function checkTwo(tableRow) {
+        var tableData = document.querySelectorAll('input[type=checkbox]');
+        var currentSelection = tableRow.querySelectorAll('input[type=checkbox]');
+
+        for (let i = 0; i < tableData.length; i++) {
+            if (tableData[i].name != currentSelection[0].name && (previousSelection != null && tableData[i].name != previousSelection[0].name)) {
+                tableData[i].checked = false;
+            }
+        }
+
+        previousSelection = currentSelection;
+        validate(2);
+    }
+
+    function validate(val) {
+        let count = 0;
+        var cb = document.querySelectorAll('input[type=checkbox]');
+        for (let i = 0; i < cb.length; i++) {
+            if (cb[i].checked == true) {
+                count++;
+            }
+        }
+
+        var submitBtn = document.querySelectorAll('input[type=submit]');
+        if (count == val) {
+            submitBtn[0].disabled = false;
+        }
+        else {
+            submitBtn[0].disabled = true;
+        }
+    }
+</script>

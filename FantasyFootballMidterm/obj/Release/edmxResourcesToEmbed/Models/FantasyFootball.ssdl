@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FantasyFootballModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FantasyFootball.dbo.FantasyFootballTeams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="FantasyFootballTeams">
+    <Key>
+      <PropertyRef Name="TeamName" />
+      <PropertyRef Name="QB" />
+      <PropertyRef Name="RB1" />
+      <PropertyRef Name="RB2" />
+      <PropertyRef Name="WR1" />
+      <PropertyRef Name="WR2" />
+      <PropertyRef Name="TE" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="TeamName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="QB" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RB1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RB2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="WR1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="WR2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FantasyFootball.dbo.games' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="games">
+    <Key>
+      <PropertyRef Name="Team" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Opponent" />
+      <PropertyRef Name="Result" />
+    </Key>
+    <Property Name="Team" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Opponent" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Result" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FantasyFootball.dbo.GamesByWeek' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="GamesByWeek">
+    <Key>
+      <PropertyRef Name="Tm" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Opp" />
+      <PropertyRef Name="Week" />
+      <PropertyRef Name="G" />
+      <PropertyRef Name="Day" />
+      <PropertyRef Name="Result" />
+    </Key>
+    <Property Name="Tm" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Opp" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Week" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="G" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Day" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Result" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FantasyFootball.dbo.players' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="players">
+    <Key>
+      <PropertyRef Name="PlayerID" />
+    </Key>
+    <Property Name="Player" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Team" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GS" Type="int" Nullable="false" />
+    <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PlayerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FFScore" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FantasyFootball.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Function Name="usp_FantasyFootballTeams_GetPlayersByUserID_Real" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FantasyFootballTeams_GetTeamNameByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_FantasyFootballTeams_SaveTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamName" Type="varchar" Mode="In" />
+    <Parameter Name="QB" Type="varchar" Mode="In" />
+    <Parameter Name="RB1" Type="varchar" Mode="In" />
+    <Parameter Name="RB2" Type="varchar" Mode="In" />
+    <Parameter Name="WR1" Type="varchar" Mode="In" />
+    <Parameter Name="WR2" Type="varchar" Mode="In" />
+    <Parameter Name="TE" Type="varchar" Mode="In" />
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GamesByWeek_GetFantasyTeamScoreByWeek" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_Players_GetByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Position" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Players_GetScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Players_ReturnAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_Players_ReturnFiltered" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FilterString" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Players_UpdateFFScores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Users_GetUserByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Users_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Users_SaveNewUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="FantasyFootballModelStoreContainer">
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FantasyFootballTeams" EntityType="Self.FantasyFootballTeams" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [FantasyFootballTeams].[TeamName] AS [TeamName], 
+    [FantasyFootballTeams].[QB] AS [QB], 
+    [FantasyFootballTeams].[RB1] AS [RB1], 
+    [FantasyFootballTeams].[RB2] AS [RB2], 
+    [FantasyFootballTeams].[WR1] AS [WR1], 
+    [FantasyFootballTeams].[WR2] AS [WR2], 
+    [FantasyFootballTeams].[TE] AS [TE], 
+    [FantasyFootballTeams].[UserID] AS [UserID]
+    FROM [dbo].[FantasyFootballTeams] AS [FantasyFootballTeams]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="games" EntityType="Self.games" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [games].[Team] AS [Team], 
+    [games].[Year] AS [Year], 
+    [games].[Date] AS [Date], 
+    [games].[Opponent] AS [Opponent], 
+    [games].[Result] AS [Result]
+    FROM [dbo].[games] AS [games]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="GamesByWeek" EntityType="Self.GamesByWeek" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [GamesByWeek].[Tm] AS [Tm], 
+    [GamesByWeek].[Year] AS [Year], 
+    [GamesByWeek].[Date] AS [Date], 
+    [GamesByWeek].[Opp] AS [Opp], 
+    [GamesByWeek].[Week] AS [Week], 
+    [GamesByWeek].[G] AS [G], 
+    [GamesByWeek].[Day] AS [Day], 
+    [GamesByWeek].[Result] AS [Result]
+    FROM [dbo].[GamesByWeek] AS [GamesByWeek]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="players" EntityType="Self.players" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [players].[Player] AS [Player], 
+    [players].[Year] AS [Year], 
+    [players].[Age] AS [Age], 
+    [players].[Team] AS [Team], 
+    [players].[GS] AS [GS], 
+    [players].[Position] AS [Position], 
+    [players].[PlayerID] AS [PlayerID], 
+    [players].[FFScore] AS [FFScore]
+    FROM [dbo].[players] AS [players]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

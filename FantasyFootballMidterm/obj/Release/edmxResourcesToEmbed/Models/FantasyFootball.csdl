@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FantasyFootballModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="player">
+    <Key>
+      <PropertyRef Name="PlayerID" />
+    </Key>
+    <Property Name="Player1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GS" Type="Int32" Nullable="false" />
+    <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PlayerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FFScore" Type="Int32" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FantasyFootballTeam">
+    <Key>
+      <PropertyRef Name="TeamName" />
+      <PropertyRef Name="QB" />
+      <PropertyRef Name="RB1" />
+      <PropertyRef Name="RB2" />
+      <PropertyRef Name="WR1" />
+      <PropertyRef Name="WR2" />
+      <PropertyRef Name="TE" />
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="TeamName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="QB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RB1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RB2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WR1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WR2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="game">
+    <Key>
+      <PropertyRef Name="Team" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Opponent" />
+      <PropertyRef Name="Result" />
+    </Key>
+    <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Opponent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="FantasyFootballEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="players" EntityType="Self.player" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="FantasyFootballTeams" EntityType="Self.FantasyFootballTeam" />
+    <EntitySet Name="games" EntityType="Self.game" />
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
+    <FunctionImport Name="usp_FantasyFootballTeams_GetPlayersByUserID_Real" ReturnType="Collection(FantasyFootballModel.usp_FantasyFootballTeams_GetPlayersByUserID_Real_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FantasyFootballTeams_GetTeamNameByUserID" ReturnType="Collection(String)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_FantasyFootballTeams_SaveTeam">
+      <Parameter Name="TeamName" Mode="In" Type="String" />
+      <Parameter Name="QB" Mode="In" Type="String" />
+      <Parameter Name="RB1" Mode="In" Type="String" />
+      <Parameter Name="RB2" Mode="In" Type="String" />
+      <Parameter Name="WR1" Mode="In" Type="String" />
+      <Parameter Name="WR2" Mode="In" Type="String" />
+      <Parameter Name="TE" Mode="In" Type="String" />
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Players_GetByPosition" ReturnType="Collection(FantasyFootballModel.usp_Players_GetByPosition_Result)">
+      <Parameter Name="Position" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Players_GetScore" ReturnType="Collection(Int32)">
+      <Parameter Name="PlayerName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Players_ReturnAll" ReturnType="Collection(FantasyFootballModel.usp_Players_ReturnAll_Result)" />
+    <FunctionImport Name="usp_Players_ReturnFiltered" ReturnType="Collection(FantasyFootballModel.usp_Players_ReturnFiltered_Result)">
+      <Parameter Name="FilterString" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Players_UpdateFFScores">
+      <Parameter Name="PlayerName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_GetUserByUserID" ReturnType="Collection(FantasyFootballModel.usp_Users_GetUserByUserID_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_Login" ReturnType="Collection(FantasyFootballModel.usp_Users_Login_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Users_SaveNewUser" ReturnType="Collection(Int32)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="GamesByWeeks" EntityType="FantasyFootballModel.GamesByWeek" />
+    <FunctionImport Name="usp_GamesByWeek_GetFantasyTeamScoreByWeek" ReturnType="Collection(FantasyFootballModel.usp_GamesByWeek_GetFantasyTeamScoreByWeek_Result)" />
+  </EntityContainer>
+  <ComplexType Name="usp_FantasyFootballTeams_GetPlayersByUserID_Real_Result">
+    <Property Type="String" Name="PlayerName" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Year" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="String" Name="Team" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Games" Nullable="false" />
+    <Property Type="String" Name="Position" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Score" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_Players_GetByPosition_Result">
+    <Property Type="String" Name="Player" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Year" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="String" Name="Team" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="GS" Nullable="false" />
+    <Property Type="String" Name="Position" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="PlayerID" Nullable="false" />
+    <Property Type="Int32" Name="FFScore" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_Players_ReturnAll_Result">
+    <Property Type="String" Name="Player" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Year" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="String" Name="Team" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="GS" Nullable="false" />
+    <Property Type="String" Name="Position" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="PlayerID" Nullable="false" />
+    <Property Type="Int32" Name="FFScore" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_Players_ReturnFiltered_Result">
+    <Property Type="String" Name="Player" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="Year" Nullable="false" />
+    <Property Type="Int32" Name="Age" Nullable="false" />
+    <Property Type="String" Name="Team" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="GS" Nullable="false" />
+    <Property Type="String" Name="Position" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="PlayerID" Nullable="false" />
+    <Property Type="Int32" Name="FFScore" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_Users_GetUserByUserID_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_Users_Login_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="GamesByWeek">
+    <Key>
+      <PropertyRef Name="Tm" />
+      <PropertyRef Name="Year" />
+      <PropertyRef Name="Date" />
+      <PropertyRef Name="Opp" />
+      <PropertyRef Name="Week" />
+      <PropertyRef Name="G" />
+      <PropertyRef Name="Day" />
+      <PropertyRef Name="Result" />
+    </Key>
+    <Property Name="Tm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Opp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Week" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="G" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Result" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="usp_GamesByWeek_GetFantasyTeamScoreByWeek_Result">
+    <Property Type="Int32" Name="UserID" Nullable="false" />
+    <Property Type="String" Name="TeamName" Nullable="false" MaxLength="500" />
+    <Property Type="Decimal" Name="Week1" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week2" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week3" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week4" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week5" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week6" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week7" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week8" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week9" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week10" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week11" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week12" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week13" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week14" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week15" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week16" Nullable="true" Precision="38" Scale="1" />
+    <Property Type="Decimal" Name="Week17" Nullable="true" Precision="38" Scale="1" />
+  </ComplexType>
+</Schema>

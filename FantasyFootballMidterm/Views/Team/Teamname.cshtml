@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h2>Please enter a team name.</h2>
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        Enter name here: @Html.TextBox("teamname")
+                        <input type="submit" value="Next &raquo;" class="btn btn-default" />
+                    </p>
+                }
+            </div>
+        </div>

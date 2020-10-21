@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="FantasyFootballEntities-Web.config Connection String" description="FantasyFootballEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.FantasyFootball.csdl|res://*/Models.FantasyFootball.ssdl|res://*/Models.FantasyFootball.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=ccfantasyfootballers.database.windows.net;initial catalog=FantasyFootball;persist security info=True;user id=misteradmin;password=Xqrt1212;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\samfr\\source\\repos\\FantasyFootballMidterm\\FantasyFootballMidterm\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='FantasyFootballEntities']/@connectionString" />
+  </parameter>
+</parameters>

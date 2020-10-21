@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FantasyFootballModelStoreContainer" CdmEntityContainer="FantasyFootballEntities">
+    <EntitySetMapping Name="players">
+      <EntityTypeMapping TypeName="FantasyFootballModel.player">
+        <MappingFragment StoreEntitySet="players">
+          <ScalarProperty Name="Player1" ColumnName="Player" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="GS" ColumnName="GS" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+          <ScalarProperty Name="FFScore" ColumnName="FFScore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FantasyFootballModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FantasyFootballTeams">
+      <EntityTypeMapping TypeName="FantasyFootballModel.FantasyFootballTeam">
+        <MappingFragment StoreEntitySet="FantasyFootballTeams">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="QB" ColumnName="QB" />
+          <ScalarProperty Name="RB1" ColumnName="RB1" />
+          <ScalarProperty Name="RB2" ColumnName="RB2" />
+          <ScalarProperty Name="WR1" ColumnName="WR1" />
+          <ScalarProperty Name="WR2" ColumnName="WR2" />
+          <ScalarProperty Name="TE" ColumnName="TE" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="games">
+      <EntityTypeMapping TypeName="FantasyFootballModel.game">
+        <MappingFragment StoreEntitySet="games">
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Opponent" ColumnName="Opponent" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="FantasyFootballModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_FantasyFootballTeams_GetPlayersByUserID_Real" FunctionName="FantasyFootballModel.Store.usp_FantasyFootballTeams_GetPlayersByUserID_Real">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_FantasyFootballTeams_GetPlayersByUserID_Real_Result">
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="Games" ColumnName="Games" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_FantasyFootballTeams_GetTeamNameByUserID" FunctionName="FantasyFootballModel.Store.usp_FantasyFootballTeams_GetTeamNameByUserID" />
+    <FunctionImportMapping FunctionImportName="usp_FantasyFootballTeams_SaveTeam" FunctionName="FantasyFootballModel.Store.usp_FantasyFootballTeams_SaveTeam" />
+    <FunctionImportMapping FunctionImportName="usp_Players_GetByPosition" FunctionName="FantasyFootballModel.Store.usp_Players_GetByPosition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_Players_GetByPosition_Result">
+          <ScalarProperty Name="Player" ColumnName="Player" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="GS" ColumnName="GS" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+          <ScalarProperty Name="FFScore" ColumnName="FFScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Players_GetScore" FunctionName="FantasyFootballModel.Store.usp_Players_GetScore" />
+    <FunctionImportMapping FunctionImportName="usp_Players_ReturnAll" FunctionName="FantasyFootballModel.Store.usp_Players_ReturnAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_Players_ReturnAll_Result">
+          <ScalarProperty Name="Player" ColumnName="Player" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="GS" ColumnName="GS" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+          <ScalarProperty Name="FFScore" ColumnName="FFScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Players_ReturnFiltered" FunctionName="FantasyFootballModel.Store.usp_Players_ReturnFiltered">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_Players_ReturnFiltered_Result">
+          <ScalarProperty Name="Player" ColumnName="Player" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Team" ColumnName="Team" />
+          <ScalarProperty Name="GS" ColumnName="GS" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+          <ScalarProperty Name="FFScore" ColumnName="FFScore" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Players_UpdateFFScores" FunctionName="FantasyFootballModel.Store.usp_Players_UpdateFFScores" />
+    <FunctionImportMapping FunctionImportName="usp_Users_GetUserByUserID" FunctionName="FantasyFootballModel.Store.usp_Users_GetUserByUserID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_Users_GetUserByUserID_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Users_Login" FunctionName="FantasyFootballModel.Store.usp_Users_Login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_Users_Login_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Users_SaveNewUser" FunctionName="FantasyFootballModel.Store.usp_Users_SaveNewUser" />
+    <EntitySetMapping Name="GamesByWeeks">
+      <EntityTypeMapping TypeName="FantasyFootballModel.GamesByWeek">
+        <MappingFragment StoreEntitySet="GamesByWeek">
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="G" ColumnName="G" />
+          <ScalarProperty Name="Week" ColumnName="Week" />
+          <ScalarProperty Name="Opp" ColumnName="Opp" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Tm" ColumnName="Tm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_GamesByWeek_GetFantasyTeamScoreByWeek" FunctionName="FantasyFootballModel.Store.usp_GamesByWeek_GetFantasyTeamScoreByWeek">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="FantasyFootballModel.usp_GamesByWeek_GetFantasyTeamScoreByWeek_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="Week1" ColumnName="Week1" />
+          <ScalarProperty Name="Week2" ColumnName="Week2" />
+          <ScalarProperty Name="Week3" ColumnName="Week3" />
+          <ScalarProperty Name="Week4" ColumnName="Week4" />
+          <ScalarProperty Name="Week5" ColumnName="Week5" />
+          <ScalarProperty Name="Week6" ColumnName="Week6" />
+          <ScalarProperty Name="Week7" ColumnName="Week7" />
+          <ScalarProperty Name="Week8" ColumnName="Week8" />
+          <ScalarProperty Name="Week9" ColumnName="Week9" />
+          <ScalarProperty Name="Week10" ColumnName="Week10" />
+          <ScalarProperty Name="Week11" ColumnName="Week11" />
+          <ScalarProperty Name="Week12" ColumnName="Week12" />
+          <ScalarProperty Name="Week13" ColumnName="Week13" />
+          <ScalarProperty Name="Week14" ColumnName="Week14" />
+          <ScalarProperty Name="Week15" ColumnName="Week15" />
+          <ScalarProperty Name="Week16" ColumnName="Week16" />
+          <ScalarProperty Name="Week17" ColumnName="Week17" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,146 @@
+﻿@using FantasyFootballMidterm.Models
+@model  List<FantasyFootballMidterm.Models.usp_GamesByWeek_GetFantasyTeamScoreByWeek_Result>
+@{
+    ViewBag.Title = "Home Page";
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+}
+
+<div class="jumbotron">
+    <h1>Fantasy Football Dashboard</h1>
+    @*<p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row">
+    @*<div class="col-md-2">
+    </div>*@
+    <div class="col-md-4">
+        @if (ViewBag.TeamName != null)
+        {
+            <h2>@ViewBag.TeamName</h2>
+            using (Html.BeginForm())
+            {
+                <p>
+                    Find by name: @Html.TextBox("SearchString")
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </p>
+            }
+        }
+        @if (Session["UserID"] != null && Model.Any(m => m.UserID == (int)Session["UserID"]))
+        {
+    <table class="table">
+        <tr>
+            <th>@Html.ActionLink("Team", "Index", new { sortOrder = ViewBag.NameSortParm})</th>
+            <th>@Html.ActionLink("Week 1", "Index", new { sortOrder = ViewBag.Week1SortParm})</th>
+            <th>@Html.ActionLink("Week 3", "Index", new { sortOrder = ViewBag.Week3SortParm})</th>
+            <th>@Html.ActionLink("Week 2", "Index", new { sortOrder = ViewBag.Week2SortParm})</th>
+            <th>@Html.ActionLink("Week 4", "Index", new { sortOrder = ViewBag.Week4SortParm})</th>
+            <th>@Html.ActionLink("Week 5", "Index", new { sortOrder = ViewBag.Week5SortParm})</th>
+            <th>@Html.ActionLink("Week 6", "Index", new { sortOrder = ViewBag.Week6SortParm})</th>
+            <th>@Html.ActionLink("Week 7", "Index", new { sortOrder = ViewBag.Week7SortParm})</th>
+            <th>@Html.ActionLink("Week 8", "Index", new { sortOrder = ViewBag.Week8SortParm})</th>
+            <th>@Html.ActionLink("Week 9", "Index", new { sortOrder = ViewBag.Week9SortParm})</th>
+            <th>@Html.ActionLink("Week 10", "Index", new { sortOrder = ViewBag.Week10SortParm})</th>
+            <th>@Html.ActionLink("Week 11", "Index", new { sortOrder = ViewBag.Week11SortParm})</th>
+            <th>@Html.ActionLink("Week 12", "Index", new { sortOrder = ViewBag.Week12SortParm})</th>
+            <th>@Html.ActionLink("Week 13", "Index", new { sortOrder = ViewBag.Week13SortParm})</th>
+            <th>@Html.ActionLink("Week 14", "Index", new { sortOrder = ViewBag.Week14SortParm})</th>
+            <th>@Html.ActionLink("Week 15", "Index", new { sortOrder = ViewBag.Week15SortParm})</th>
+            <th>@Html.ActionLink("Week 16", "Index", new { sortOrder = ViewBag.Week16SortParm})</th>
+            <th>@Html.ActionLink("Week 17", "Index", new { sortOrder = ViewBag.Week17SortParm})</th>
+        </tr>
+        @foreach (var player in Model)
+        {
+            if (ViewBag.TeamName != null && player.TeamName == (string)ViewBag.TeamName)
+            {
+                <tr>
+                    <td><b>@player.TeamName</b></td>
+                    <td><b>@player.Week1</b></td>
+                    <td><b>@player.Week2</b></td>
+                    <td><b>@player.Week3</b></td>
+                    <td><b>@player.Week4</b></td>
+                    <td><b>@player.Week5</b></td>
+                    <td><b>@player.Week6</b></td>
+                    <td><b>@player.Week7</b></td>
+                    <td><b>@player.Week8</b></td>
+                    <td><b>@player.Week9</b></td>
+                    <td><b>@player.Week10</b></td>
+                    <td><b>@player.Week11</b></td>
+                    <td><b>@player.Week12</b></td>
+                    <td><b>@player.Week13</b></td>
+                    <td><b>@player.Week14</b></td>
+                    <td><b>@player.Week15</b></td>
+                    <td><b>@player.Week16</b></td>
+                    <td><b>@player.Week17</b></td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>@player.TeamName</td>
+                    <td>@player.Week1</td>
+                    <td>@player.Week2</td>
+                    <td>@player.Week3</td>
+                    <td>@player.Week4</td>
+                    <td>@player.Week5</td>
+                    <td>@player.Week6</td>
+                    <td>@player.Week7</td>
+                    <td>@player.Week8</td>
+                    <td>@player.Week9</td>
+                    <td>@player.Week10</td>
+                    <td>@player.Week11</td>
+                    <td>@player.Week12</td>
+                    <td>@player.Week13</td>
+                    <td>@player.Week14</td>
+                    <td>@player.Week15</td>
+                    <td>@player.Week16</td>
+                    <td>@player.Week17</td>
+                </tr>
+            }
+        }
+    </table>
+        }
+        else
+        {
+            <h2>Time to create your team, @Session["Username"].</h2>
+            @Html.ActionLink("Create Team \u00BB", "Teamname", "Team", null, new { @class = "btn btn-default" })
+        }
+    </div>
+   
+</div>
+@*<div class="row">
+
+    <div class="col-md-4">
+        @using (Html.BeginForm())
+        {
+            <p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" class="btn btn-default" />
+            </p>
+        }
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Position</th>
+                <th>Score</th>
+            </tr>
+            @foreach (var player in ViewBag.AllPlayers)
+            {
+                <tr>
+                    <td>@player.Player</td>
+                    <td>@player.Team</td>
+                    <td>@player.Position</td>
+                    <td>@player.FFScore</td>
+                </tr>
+            }
+        </table>
+
+        <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>*@
